@@ -1,125 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Junaid Akhtar - Profile</title>
+  <meta charset="UTF-8">
+  <title>Simple Calculator</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
+      font-family: Arial, sans-serif;
       background: #f4f4f4;
-      color: #333;
+      display: flex;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
     }
-    header {
-      position: relative;
+    .calculator {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
     }
-    header img {
+    input[type="text"] {
       width: 100%;
-      height: auto;
-      display: block;
-    }
-    .overlay {
-      position: absolute;
-      top: 20px;
-      left: 30px;
-      color: white;
-      text-shadow: 1px 1px 5px black;
-    }
-    .overlay h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 25px;
-      margin-bottom: 30px;
+      height: 50px;
+      font-size: 24px;
+      text-align: right;
+      margin-bottom: 10px;
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #ccc;
+      padding-right: 10px;
     }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      gap: 10px;
     }
-
-    h2 {
-      color: #4a90e2;
-      margin-top: 0;
+    button {
+      height: 50px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #eee;
+      cursor: pointer;
     }
-
-    footer {
-      text-align: center;
-      background: #333;
+    button.operator {
+      background-color: #f9a825;
       color: white;
-      padding: 15px 0;
     }
-
-    a {
-      color: #4a90e2;
-      text-decoration: none;
-      transition: color 0.3s ease;
+    button.equal {
+      background-color: #4caf50;
+      color: white;
     }
-
-    a:hover {
-      color: #0077ff;
-      text-decoration: underline;
+    button.clear {
+      background-color: #f44336;
+      color: white;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <img src="C:\Users\LAB-28\Downloads\IMG20241205220014.jpg" alt="Banner" />
-    <div class="overlay">
-      <h1>Junaid Akhtar</h1>
-      <p>Personal Profile Website</p>
-    </div>
-  </header>
+<div class="calculator">
+  <input type="text" id="display" readonly>
+  <div class="buttons">
+    <button onclick="clearDisplay()" class="clear">C</button>
+    <button onclick="appendValue('/')">/</button>
+    <button onclick="appendValue('*')">*</button>
+    <button onclick="appendValue('-')">-</button>
 
-  <main>
-    <section class="card">
-      <h2>Basic Information</h2>
-      <p><strong>Full Name:</strong> Junaid Akhtar</p>
-      <p><strong>Father's Name:</strong> Jamil Akhtar</p>
-      <p><strong>Address:</strong> Ward No. 02, near Masjid, Runnisaidpur, Sitamarhi, Bihar (843328)</p>
-      <p><strong>Country:</strong> India</p>
-    </section>
+    <button onclick="appendValue('7')">7</button>
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+    <button onclick="appendValue('+')" class="operator">+</button>
 
-    <section class="card">
-      <h2>About Me</h2>
-      <p>Hello! I'm Junaid Akhtar, a tech enthusiast who loves exploring the digital world. I enjoy working with web tools, editing images online, and creating content that is both creative and functional.</p>
-    </section>
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+    <button onclick="calculate()" class="equal" rowspan="2">=</button>
 
-    <section class="card">
-      <h2>Skills & Interests</h2>
-      <ul>
-        <li>Web Design & HTML</li>
-        <li>Image Editing</li>
-        <li>Online Tools & Free Software</li>
-        <li>Creative Content Making</li>
-        <li>Exploring Technology</li>
-      </ul>
-    </section>
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+    
+    <button onclick="appendValue('0')">0</button>
+    <button onclick="appendValue('.')">.</button>
+  </div>
+</div>
 
-    <section class="card">
-      <h2>Contact Me</h2>
-      <p><strong>Email:</strong> <a href="mailto:yourname@example.com">yourname@example.com</a></p>
-      <p><strong>Phone:</strong> <a href="tel:+919999999999">+91-9999999999</a></p>
-    </section>
-  </main>
+<script>
+  const display = document.getElementById('display');
 
-  <footer>
-    <p>© 2025 Junaid Akhtar. All rights reserved.</p>
-  </footer>
+  function appendValue(value) {
+    display.value += value;
+  }
+
+  function clearDisplay() {
+    display.value = '';
+  }
+
+  function calculate() {
+    try {
+      display.value = eval(display.value);
+    } catch (e) {
+      display.value = 'Error';
+    }
+  }
+</script>
 
 </body>
 </html>
