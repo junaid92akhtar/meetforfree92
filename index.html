@@ -2,21 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Profile</title>
+  <title>My Profile Site</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
 
     body {
       margin: 0;
-      height: 100vh;
       background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
       color: #fff;
       font-family: 'Orbitron', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    nav {
       display: flex;
       justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      cursor: none;
+      background-color: rgba(0, 255, 200, 0.1);
+      padding: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #00ffd5;
+    }
+
+    nav a {
+      color: #00ffd5;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .page {
+      display: none;
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+      animation: fadeIn 0.5s;
+    }
+
+    .active {
+      display: block;
     }
 
     .card {
@@ -27,13 +58,7 @@
       box-shadow: 0 0 40px rgba(0, 255, 200, 0.3);
       backdrop-filter: blur(20px);
       text-align: center;
-      transform: rotateX(10deg) rotateY(-10deg);
       transition: 0.5s;
-    }
-
-    .card:hover {
-      transform: rotateX(0deg) rotateY(0deg) scale(1.05);
-      box-shadow: 0 0 80px rgba(0, 255, 200, 0.5);
     }
 
     .card img {
@@ -61,22 +86,78 @@
       height: 20px;
       border-radius: 50%;
       background: #00ffd5;
-      position: absolute;
+      position: fixed;
       pointer-events: none;
       mix-blend-mode: difference;
       transition: transform 0.1s;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <img src="https://cdn.sahityapedia.com/images/profile/3529b6c2e2d26c96246e2271db850474_dce89f9b39db7cf9a57d3beb318d5efe_600.jpg" alt="Profile Picture">
-    <h2>Junaid Akhtar</h2>
-    <p>Passionate Student | Tech Enthusiast | Creative Thinker</p>
-    <p>Currently studying at Darul Huda Islamic University, always exploring new ideas and skills.</p>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('about')">About</a>
+    <a href="#" onclick="showPage('skills')">Skills</a>
+    <a href="#" onclick="showPage('projects')">Projects</a>
+    <a href="#" onclick="showPage('contact')">Contact</a>
+  </nav>
+
+  <!-- Page 1: Home -->
+  <div class="page active" id="home">
+    <div class="card">
+      <img src="C:\Users\anjum\Downloads\ghjfgjhfgtk.jpg" alt="Profile Picture">
+      <h2>Junaid Akhtar</h2>
+      <p>Student | Tech Enthusiast | Creative Thinker</p>
+    </div>
   </div>
 
-  <div class="cursor" id="cursor"></div>
+  <!-- Page 2: About -->
+  <div class="page" id="about">
+    <div class="card">
+      <h2>About Me</h2>
+      <p>I am currently studying in Class 10 at Darul Huda Islamic University. I am passionate about web development, digital design, and always eager to learn more.</p>
+    </div>
+  </div>
+
+  <!-- Page 3: Skills -->
+  <div class="page" id="skills">
+    <div class="card">
+      <h2>Skills</h2>
+      <p>HTML, CSS, JavaScript, Graphic Design, Poster Making, Arabic Typing</p>
+    </div>
+  </div>
+
+  <!-- Page 4: Projects -->
+  <div class="page" id="projects">
+    <div class="card">
+      <h2>Projects</h2>
+      <p>📱 Designed personal portfolio site<br>
+         🎨 Created Arabic posters for events<br>
+         🛍️ Co-founded an online gadget business idea
+      </p>
+    </div>
+  </div>
+
+  <!-- Page 5: Contact -->
+  <div class="page" id="contact">
+    <div class="card">
+      <h2>Contact Me</h2>
+      <p>Email: example@gmail.com<br>
+         Instagram: @junaid_profile<br>
+         Address: Runnisaidpur, Sitamarhi, Bihar
+      </p>
+    </div>
+  </div>
 
   <script>
     const cursor = document.getElementById('cursor');
@@ -84,6 +165,11 @@
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
     });
+
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
   </script>
 </body>
 </html>
