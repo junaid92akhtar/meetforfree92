@@ -1,189 +1,89 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <title>Neon Profile Card with Cursor Effect</title>
-    <style>
-        * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        cursor: none; /* Hide system cursor */
-        }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
 
-        body {
-        height: 100vh;
-        background: radial-gradient(circle at center, #0f0c29, #302b63, #24243e);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Segoe UI', sans-serif;
-        overflow: hidden;
-        position: relative;
-        }
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      cursor: none;
+    }
 
-        /* Neon Profile Card */
-        .profile-card {
-        background: #111;
-        padding: 30px;
-        width: 350px;
-        border-radius: 20px;
-        text-align: center;
-        position: relative;
-        z-index: 1;
-        box-shadow: 0 0 30px #00f2fe88;
-        border: 2px solid #00f2fe;
-        animation: pulse 2s infinite;
-        }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #ffffff22;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 0 40px rgba(0, 255, 200, 0.3);
+      backdrop-filter: blur(20px);
+      text-align: center;
+      transform: rotateX(10deg) rotateY(-10deg);
+      transition: 0.5s;
+    }
 
-        .profile-card::before {
-        content: "";
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        z-index: -1;
-        background: linear-gradient(45deg, #00f2fe, #4facfe, #00f2fe);
-        background-size: 400% 400%;
-        animation: neonBorder 6s linear infinite;
-        border-radius: 22px;
-        }
+    .card:hover {
+      transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+      box-shadow: 0 0 80px rgba(0, 255, 200, 0.5);
+    }
 
-        .profile-card img {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 4px solid #00f2fe;
-        object-fit: cover;
-        margin-bottom: 15px;
-        }
+    .card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #00ffd5;
+      margin-bottom: 20px;
+    }
 
-        .profile-card h2 {
-        color: #00f2fe;
-        margin-bottom: 5px;
-        }
+    .card h2 {
+      font-size: 30px;
+      margin: 10px 0;
+    }
 
-        .profile-card p {
-        color: #ccc;
-        font-size: 14px;
-        margin-bottom: 8px;
-        }
+    .card p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #ccc;
+    }
 
-        .socials {
-        margin-top: 15px;
-        }
-
-        .socials a {
-        margin: 0 10px;
-        color: #00f2fe;
-        font-size: 20px;
-        text-decoration: none;
-        transition: transform 0.3s;
-        }
-
-        .socials a:hover {
-        transform: scale(1.2);
-        color: #4facfe;
-        }
-
-        @keyframes neonBorder {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-        }
-
-        @keyframes pulse {
-        0%, 100% {
-            box-shadow: 0 0 20px #00f2fe88;
-        }
-        50% {
-            box-shadow: 0 0 40px #00f2fe;
-        }
-        }
-
-        /* Custom Cursor Dot */
-        .cursor-dot {
-        position: fixed;
-        width: 12px;
-        height: 12px;
-        background-color: #00f2fe;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        transition: transform 0.1s ease;
-        mix-blend-mode: difference;
-        }
-
-        /* Ripple Effect on Click */
-        .click-ripple {
-        position: fixed;
-        width: 40px;
-        height: 40px;
-        border: 2px solid #00f2fe;
-        border-radius: 50%;
-        pointer-events: none;
-        animation: ripple 0.5s ease-out forwards;
-        z-index: 9999;
-        }
-
-        @keyframes ripple {
-        0% {
-            transform: scale(0.3);
-            opacity: 1;
-        }
-        100% {
-            transform: scale(3);
-            opacity: 0;
-        }
-        }
-    </style>
-    <!-- Font Awesome for social icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    </head>
-    <body>
-
-    <!-- Custom Cursor Dot -->
-    <div class="cursor-dot" id="cursor-dot"></div>
-
-    <!-- Profile Card -->
-    <div class="profile-card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAU7iJuMTgQnJr1WV1qjkAdQim8X63hHYAeg&s" alt="Profile Photo">
+    /* Glow Cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #00ffd5;
+      position: absolute;
+      pointer-events: none;
+      mix-blend-mode: difference;
+      transition: transform 0.1s;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="C:\Users\anjum\Downloads\ghjfgjhfgtk.jpg" alt="Profile Picture">
     <h2>Junaid Akhtar</h2>
-    <p>Student, Class 10</p>
-    <p>Darul Huda Islamic University</p>
-    <p>Sitamarhi, Bihar</p>
-    <div class="socials">
-       
-        <a href="https://instagram.com/meetforfree92
-"><i class="fab fa-instagram"></i></a>
-    </div>
-    </div>
+    <p>Passionate Student | Tech Enthusiast | Creative Thinker</p>
+    <p>Currently studying at Darul Huda Islamic University, always exploring new ideas and skills.</p>
+  </div>
 
-    <!-- JS for Cursor Movement & Ripple -->
-    <script>
-    const cursor = document.getElementById("cursor-dot");
+  <div class="cursor" id="cursor"></div>
 
-    document.addEventListener("mousemove", e => {
-        cursor.style.left = e.pageX + "px";
-        cursor.style.top = e.pageY + "px";
+  <script>
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
     });
-
-    document.addEventListener("click", e => {
-        const ripple = document.createElement("div");
-        ripple.className = "click-ripple";
-        ripple.style.left = (e.pageX - 20) + "px";
-        ripple.style.top = (e.pageY - 20) + "px";
-        document.body.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 500);
-    });
-    </script>
-
-    </body>
-    </html>
+  </script>
+</body>
+</html>
